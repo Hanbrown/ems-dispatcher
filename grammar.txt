@@ -1,0 +1,15 @@
+7 and 8 are 49 to drop tower for hi
+
+7and8are49todroptowerforhi
+
+
+S => B Q C R L F E
+A => 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, s1, s2, s3, s4, s5, s6
+B => A, A P B
+C => 49, 19, 97, 98
+E => hi, c, r, 53, *
+L => *
+P => and
+Q => is, are
+R => to
+F => for
