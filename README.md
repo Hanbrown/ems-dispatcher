@@ -18,4 +18,8 @@ Design should be minimal and functional -- but it should absolutely be __readabl
 - Emphasis on readability over style and effects
 - Command line with strict context-free grammar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Technologies
+- Bootstrap  
+- React JS
+- SASS
+- Webpack/Babel

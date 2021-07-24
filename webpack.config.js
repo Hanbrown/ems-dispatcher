@@ -15,6 +15,17 @@ module.exports = {
 				use: {
 					loader: "babel-loader"
 				}
+			},
+			{
+				test: /\.scss$/i,
+				use: [
+					// 3. Inject JS into DOM
+					"style-loader",
+					// 2. Translates CSS into CommonJS
+					"css-loader",
+					// 1. Compiles Sass to CSS
+					"sass-loader",
+				],
 			}
 		]
 	},
