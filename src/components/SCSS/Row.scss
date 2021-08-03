@@ -1,0 +1,86 @@
+/******************************************************************
+ *  Row
+ */
+.entry-row {
+	background-color: $gray-600;
+	height: 110px;
+	padding: 5px;
+}
+
+.entry-red {
+	background-color: $red;
+}
+
+.entry-green {
+	background-color: $green;
+	filter: drop-shadow(-2px 5px 5px $gray-800);
+}
+
+.entry-blue {
+	background-color: $blue;
+}
+
+.entry-yellow {
+	background-color: $yellow;
+}
+
+/*************************************************
+ *   Labels in each row
+ */
+.entry-row {
+	* {
+		display: inline;
+		margin-left: 5px;
+	}
+
+	h4 {
+		align-self: flex-end;
+		text-align: right;
+		flex: 0.033;
+	}
+
+	h2 {
+		align-self: flex-end;
+	}
+
+	.name-title {
+		text-align: left;
+		color: $gray-700;
+		flex: 0.1;
+	}
+
+	.label-title {
+		text-align: right;
+		flex: 0.06;
+	}
+
+	.number-title {
+		text-align: center;
+		font-size: 80px;
+		flex: 0.07;
+	}
+
+	.action-title {
+		text-align: center;
+		font-size: 80px;
+		flex: 0.1;
+	}
+
+	.action_mod-title {
+		text-align: left;
+		font-size: 30px;
+		flex: 0.2;
+	}
+
+	.place-title {
+		text-align: left;
+		font-size: 40px;
+		flex: 0.3;
+	}
+
+	.call-title {
+		text-align: center;
+		font-size: 50px;
+		flex: 0.07;
+	}
+}
