@@ -12,6 +12,12 @@ $green: rgb(126, 161, 79);
 $blue: rgb(63, 169, 245);
 $yellow: rgb(254, 248, 166);
 
+$theme-colors: (
+		"info": $blue,
+		"danger": $red,
+		"success": $green,
+);
+
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
 /***********************************************************************************************************************
@@ -27,4 +33,4 @@ $yellow: rgb(254, 248, 166);
 	}
 }
 
-@import "Row";
+@import "Entry";

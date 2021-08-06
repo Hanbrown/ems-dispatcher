@@ -1,19 +1,25 @@
-import React from "react";
-import Buffer from "./Buffer";
-import Entry from "./Row";
+import React, {useState} from "react";
 
-class Main extends React.Component {
-	render() {
-		return(
-			<div>
-				<Buffer/>
-				<Entry color={"green"}/>
-				<Entry color={"red"}/>
-				<Buffer/>
-				<Entry color={"yellow"}/>
-			</div>
-		);
-	}
+import Button from "react-bootstrap/Button";
+
+import Buffer from "./Buffer";
+import Entry from "./Entry";
+
+const Main = () => {
+
+	const [entryList, addTheEntry] = useState([]);
+
+	const onAddBtnPress = () => {
+		addTheEntry(entryList.concat(<Entry />));
+	};
+	return(
+		<div>
+			<Button variant="info" onClick={onAddBtnPress}>Add Object</Button>
+			<h1>Hello World! it's me, Pranav</h1>
+			<Buffer />
+			{ entryList }
+		</div>
+	);
 }
 
 export default Main;

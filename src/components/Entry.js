@@ -1,8 +1,5 @@
 import React from "react";
-import {
-	Container,
-} from "reactstrap";
-import Buffer from "./Buffer";
+import Container from "react-bootstrap/Container";
 
 class Entry extends React.Component {
 	constructor(props) {
