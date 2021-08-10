@@ -5,6 +5,7 @@ class Entry extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			"id": 0,
 			"name": "Guillermo",
 			"label": "Safety",
 			"number": 11,
@@ -27,20 +28,25 @@ class Entry extends React.Component {
 		return (
 
 			<Container className={"d-flex entry-row "+ rowColor} fluid={true}>
-				<h4 className={"name-title"}>{this.state.name}</h4>				{/* Pranav */}
+				{/*<h4 className={"name-title"}>{this.state.name}</h4>				*/}
+				<input type={"text"} className={"name-title"} placeholder={this.state.name} />	{/* Pranav */}
 
-				<h4 className={"label-title"}>{this.state.label}</h4>			{/* Med */}
-				<h2 className={"number-title"}>{this.state.number}</h2>			{/* 1 */}
+				<input type={"text"} className={"label-title"} placeholder={this.state.label} />				{/* Med */}
+				<input type={"text"} className={"number-title"} placeholder={this.state.number} />			{/* 1 */}
 
 				<h4>is</h4>
-				<h2 className={"action-title"}>{this.state.action}</h2>         {/* 49 */}
-				<h2 className={"action_mod-title"}>{this.state.action_mod}</h2> {/* en route */}
+				<input type={"text"} className={"action-title"} placeholder={this.state.action} />
+				{/*<h2 className={"action-title"}>{this.state.action}</h2>         /!* 10-49 *!/*/}
+				{/*<h2 className={"action_mod-title"}>{this.state.action_mod}</h2> /!* en route *!/*/}
+				<textarea className={"action_mod-title"} placeholder={this.state.action_mod}> </textarea>
 
 				<h4>to</h4>
-				<h2 className={"place-title"}>{this.state.place}</h2>           {/* Railblazer */}
+				{/*<h2 className={"place-title"}>{this.state.place}</h2>           				/!* Railblazer *!/*/}
+				<textarea className={"place-title"} placeholder={this.state.place} > </textarea>
 
 				<h4>for</h4>
-				<h2 className={"call-title"}>{this.state.call}</h2>             {/* Signal 9HI */}
+				{/*<h2 className={"call-title"}>{this.state.call}</h2>             /!* Signal 9HI *!/*/}
+				<input type={"text"} className={"call-title"} placeholder={this.state.call} />
 			</Container>
 		);
 	}

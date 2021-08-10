@@ -12,12 +12,16 @@ const Main = () => {
 	const onAddBtnPress = () => {
 		addTheEntry(entryList.concat(<Entry />));
 	};
+
+	const isEmpty = entryList.length > 0;
+
 	return(
 		<div>
+			<h1>EMS Dispatcher</h1>
 			<Button variant="info" onClick={onAddBtnPress}>Add Object</Button>
-			<h1>Hello World! it's me, Pranav</h1>
+			<hr />
 			<Buffer />
-			{ entryList }
+			{ isEmpty ? entryList : <h4>Click the <em>Add object</em> button to start</h4> }
 		</div>
 	);
 }

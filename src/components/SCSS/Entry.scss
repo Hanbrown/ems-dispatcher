@@ -33,6 +33,23 @@
 		margin-left: 5px;
 	}
 
+	input {
+
+		padding: 0;
+		background-color: transparent;
+		border: none;
+		align-self: flex-end;
+	}
+
+	textarea {
+		min-height: 6.0rem;
+		max-height: 6.0rem;
+		padding: 0 5px 0 0;
+		background-color: transparent;
+		border: none;
+		align-self: flex-end;
+	}
+
 	h4 {
 		align-self: flex-end;
 		text-align: right;
@@ -44,43 +61,57 @@
 	}
 
 	.name-title {
+		//color: $gray-700;
 		text-align: left;
-		color: $gray-700;
-		flex: 0.1;
+
+		height: 3rem;
+		font-size: 1.5rem;
+		max-width: 12%;
 	}
 
 	.label-title {
-		text-align: right;
-		flex: 0.06;
+		height: 3rem;
+		font-size: 1.5rem;
+		max-width: 6%;
 	}
 
 	.number-title {
 		text-align: center;
+
+		height: 6.5rem;
 		font-size: 80px;
-		flex: 0.07;
+		max-width: 8%;
+		//flex: 0.07;
+	}
+
+	input:focus {
+		text-align: left;
 	}
 
 	.action-title {
 		text-align: center;
+		height: 6.5rem;
 		font-size: 80px;
-		flex: 0.1;
+		max-width: 20%;
 	}
 
 	.action_mod-title {
+		line-height: 35px;
 		text-align: left;
 		font-size: 30px;
-		flex: 0.2;
+		max-width: 12%;
 	}
 
 	.place-title {
+		line-height: 45px;
 		text-align: left;
 		font-size: 40px;
-		flex: 0.3;
+		max-width: 23%;
 	}
 
 	.call-title {
 		text-align: center;
 		font-size: 50px;
-		flex: 0.07;
+		max-width: 8%;
 	}
 }

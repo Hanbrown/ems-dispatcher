@@ -11,9 +11,11 @@ function Prompt() {
 
 	return (
 		<>
+			{/** This part will show up on a webpage **/}
 			<Button variant="info" onClick={handleShow}>
 				Launch demo modal
 			</Button>
+			{/** *********************************** **/}
 
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
