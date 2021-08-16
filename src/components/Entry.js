@@ -38,11 +38,11 @@ class Entry extends React.Component {
 				<input type={"text"} className={"action-title"} placeholder={this.state.action} />
 				{/*<h2 className={"action-title"}>{this.state.action}</h2>         /!* 10-49 *!/*/}
 				{/*<h2 className={"action_mod-title"}>{this.state.action_mod}</h2> /!* en route *!/*/}
-				<textarea className={"action_mod-title"} placeholder={this.state.action_mod}> </textarea>
+				<textarea className={"action_mod-title"} placeholder={this.state.action_mod}/>
 
 				<h4>to</h4>
 				{/*<h2 className={"place-title"}>{this.state.place}</h2>           				/!* Railblazer *!/*/}
-				<textarea className={"place-title"} placeholder={this.state.place} > </textarea>
+				<textarea className={"place-title"} placeholder={this.state.place}/>
 
 				<h4>for</h4>
 				{/*<h2 className={"call-title"}>{this.state.call}</h2>             /!* Signal 9HI *!/*/}
