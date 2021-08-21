@@ -5,9 +5,6 @@ import Button from "react-bootstrap/Button";
 import Buffer from "./Buffer";
 import Entry from "./Entry";
 
-
-let indexEntry = 0;
-let indexBuff = 0;
 const Main = () => {
 
 	const [entryList, addTheEntry] = useState([]);

@@ -41,6 +41,12 @@
 		align-self: flex-end;
 	}
 
+	input:focus {
+		text-align: left;
+		background-color: $body-bg;
+		color: $body-color;
+	}
+
 	textarea {
 		min-height: 5.0rem;
 		max-height: 5.0rem;
@@ -48,6 +54,12 @@
 		background-color: transparent;
 		border: none;
 		align-self: flex-end;
+	}
+
+	textarea:focus {
+		text-align: left;
+		background-color: $body-bg;
+		color: $body-color;
 	}
 
 	h4 {
@@ -82,10 +94,6 @@
 		font-size: 80px;
 		max-width: 8%;
 		//flex: 0.07;
-	}
-
-	input:focus {
-		text-align: left;
 	}
 
 	.action-title {
