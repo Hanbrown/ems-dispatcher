@@ -66,6 +66,7 @@
 		align-self: flex-end;
 		text-align: right;
 		flex: 0.033;
+		margin-bottom: 3px;
 	}
 
 	h2 {
@@ -92,8 +93,7 @@
 
 		height: 5.0rem;
 		font-size: 80px;
-		max-width: 8%;
-		//flex: 0.07;
+		max-width: 4%;
 	}
 
 	.action-title {
@@ -110,11 +110,56 @@
 		max-width: 12%;
 	}
 
-	.place-title {
-		line-height: 45px;
-		text-align: left;
-		font-size: 35px;
-		max-width: 23%;
+	.place-container {
+		//border: 1px solid #000;
+		background: transparent;
+		position: relative;
+		overflow: auto;
+		flex: 0.85;
+
+		.place-title {
+			font-size: $h2-font-size;
+			line-height: $h2-font-size;
+			min-height: 10px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding: 5px 0;
+			margin: 0 5px;
+			overflow: hidden;
+		}
+
+		.place-title:focus {
+			background-color: $body-bg;
+			border: solid medium rgb(89, 80, 229);
+		}
+	}
+
+	.am-container {
+		//border: 1px solid #000;
+		background: transparent;
+		position: relative;
+		overflow: auto;
+		flex: 0.4;
+
+		.am-title {
+			font-size: $h2-font-size;
+			line-height: $h2-font-size;
+			min-height: 10px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding: 5px 0;
+			margin: 0 5px;
+			overflow: hidden;
+		}
+
+		.am-title:focus {
+			background-color: $body-bg;
+			border: solid medium rgb(89, 80, 229);
+		}
 	}
 
 	.call-title {

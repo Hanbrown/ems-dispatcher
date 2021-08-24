@@ -1,7 +1,18 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
-const Entry = ( { entry, setEntryList } ) => {
+/** An individual entry **/
+const Entry = ( { entry, entries, setEntryList } ) => {
+
+	// Delete an entry on click
+	const deleteHandler = () => {
+		setEntryList(
+			entries.filter(el => (
+				el.id !== entry.id
+			))
+		);
+	}
 
 	return (
 
@@ -16,15 +27,19 @@ const Entry = ( { entry, setEntryList } ) => {
 			<input type={"text"} className={"action-title"} placeholder={entry.action} />
 			{/*<h2 className={"action-title"}>{this.state.action}</h2>         /!* 10-49 *!/*/}
 			{/*<h2 className={"action_mod-title"}>{this.state.action_mod}</h2> /!* en route *!/*/}
-			<textarea className={"action_mod-title"} placeholder={entry.action_mod}/>
+			<div className={"am-container"}>
+				<p className={"am-title"} contentEditable={true} >{entry.action_mod}</p>           				{/* Railblazer */}
+			</div>
 
 			<h4>to</h4>
-			{/*<h2 className={"place-title"}>{this.state.place}</h2>           				/!* Railblazer *!/*/}
-			<textarea className={"place-title"} placeholder={entry.place}/>
+			<div className={"place-container"}>
+				<p id={"place-title"} className={"place-title"} contentEditable={true} >{entry.place}</p>           				{/* Railblazer */}
+			</div>
 
 			<h4>for</h4>
 			{/*<h2 className={"call-title"}>{this.state.call}</h2>             /!* Signal 9HI *!/*/}
 			<input type={"text"} className={"call-title"} placeholder={entry.call} />
+			<Button variant={"danger"} onClick={deleteHandler} >Delete</Button>
 		</Container>
 	);
 }

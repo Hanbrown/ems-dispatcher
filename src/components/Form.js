@@ -1,68 +1,35 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// Import BS Components
+import Button from "react-bootstrap/Button";
+
 // Stuff in the parentheses are the properties of this component
-const Form = ( { inputText, setInputText, todos, setTodos, setStatus, setFilteredTodos } ) => {
+const Form = ({ entries, setEntryList } ) => {
 
 	// All code is executed sequentially from here.
 
-	// Change the state of the form (see App-tut.js)
-	const inputTextHandler = (e) => {
-		setInputText(e.target.value);
-	}
-
-	const filterHandler = () => {
-		switch(status) {
-			case "completed":
-				setFilteredTodos(todos.filter(todo => todo.completed === true));
-				break;
-			case "uncompleted":
-				setFilteredTodos(todos.filter(todo => todo.completed === false));
-				break;
-			default:
-				setFilteredTodos(todos);
-				break;
-		}
-	}
-
-	// Add a new task when user hits the "plus" icon
-	const submitTodoHandler = (e) => {
+	const setEntryListHandler = (e) => {
 		e.preventDefault();
-		// New JS syntax. ...todos means keep all other properties, and curly brace stuff is all that is modified
-		setTodos([
-			{ text: inputText, completed: false, id: uuidv4() }, ...todos
+
+		setEntryList([
+			{
+				id: uuidv4(),
+				name: "Vickie",
+				label: "Safety",
+				number: 2,
+				action: "10-8",
+				action_mod: "on duty",
+				place: "First Aid",
+				call: ""
+			}, ...entries
 		]);
-
-		// Reset value in form
-		setInputText("");
-
-		filterHandler();
-	}
-
-	// Filter results
-	const setStatusHandler = (e) => {
-		setStatus(e.target.value);
-		filterHandler();
 	}
 
 	return (
 		<form>
-			<input
-				value={inputText}
-				onChange={inputTextHandler}
-				type="text"
-				className="todo-input"
-			/>
-			<button className="todo-button" onClick={submitTodoHandler} type="submit">
-				<i className="fas fa-plus-square"></i>
-			</button>
-			<div className="select">
-				<select name="todos" className="filter-todo" onChange={setStatusHandler}>
-					<option value="all">All</option>
-					<option value="completed">Completed</option>
-					<option value="uncompleted">Uncompleted</option>
-				</select>
-			</div>
+			<Button variant="info" onClick={setEntryListHandler} >Add</Button>
+			<Button variant="info" >Edit</Button>
 		</form>
 	);
 }

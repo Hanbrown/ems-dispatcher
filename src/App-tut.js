@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./components/SCSS/tut.scss";
 
 // Import Components
-import Form from "./components/Form";
+import FormTut from "./components/Form-tut";
 import TodoList from "./components/TodoList";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
 			<header>
 				<h1>Ed's Todo List</h1>
 			</header>
-			<Form inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} setStatus={setStatus} setFilteredTodos={setFilteredTodos} /> {/* Now, Form.js can access other functions */}
+			<FormTut inputText={inputText} setInputText={setInputText} todos={todos} setTodos={setTodos} setStatus={setStatus} setFilteredTodos={setFilteredTodos} /> {/* Now, Form-tut.js can access other functions */}
 			<TodoList todos={todos} setTodos={setTodos} status={status} />
 		</div>
 	);

@@ -11,7 +11,7 @@ const EntryList = ( { entries, setEntryList } ) => {
 	return (
 		<Container fluid={true}>
 			{entries.map(entry => (
-				<Entry key={entry.id} entry={entry} setEntryList={setEntryList} />
+				<Entry key={entry.id} entry={entry} entries={entries} setEntryList={setEntryList} />
 			))}
 		</Container>
 	);
