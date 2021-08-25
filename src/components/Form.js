@@ -22,7 +22,8 @@ const Form = ({ entries, setEntryList } ) => {
 				action: "Act",
 				action_mod: "modifier",
 				place: "Location",
-				call: "Call"
+				call: "Call",
+				color: "grey",
 			}
 		]);
 	}

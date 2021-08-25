@@ -2,25 +2,28 @@
  *  Entry Row
  */
 .entry-row {
-	background-color: $gray-600;
 	height: 90px;
 	padding: 5px;
 }
 
-.entry-red {
+.ecl-grey {
+	background-color: $gray-600;
+}
+
+.ecl-red {
 	background-color: $red;
 }
 
-.entry-green {
+.ecl-green {
 	background-color: $green;
 	filter: drop-shadow(-2px 5px 5px $gray-800);
 }
 
-.entry-blue {
+.ecl-blue {
 	background-color: $blue;
 }
 
-.entry-yellow {
+.ecl-yellow {
 	background-color: $yellow;
 }
 
