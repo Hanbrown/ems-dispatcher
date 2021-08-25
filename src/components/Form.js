@@ -13,23 +13,24 @@ const Form = ({ entries, setEntryList } ) => {
 		e.preventDefault();
 
 		setEntryList([
+			...entries,
 			{
 				id: uuidv4(),
-				name: "Vickie",
+				name: "Name",
 				label: "Safety",
-				number: 2,
-				action: "10-8",
-				action_mod: "on duty",
-				place: "First Aid",
-				call: ""
-			}, ...entries
+				number: "#",
+				action: "Act",
+				action_mod: "modifier",
+				place: "Location",
+				call: "Call"
+			}
 		]);
 	}
 
 	return (
 		<form>
-			<Button variant="info" onClick={setEntryListHandler} >Add</Button>
-			<Button variant="info" >Edit</Button>
+			<Button variant="info" onClick={setEntryListHandler} >Add Unit</Button>
+			{/*<Button variant="info" >Edit</Button>*/}
 		</form>
 	);
 }

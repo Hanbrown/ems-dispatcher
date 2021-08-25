@@ -34,7 +34,6 @@
 	}
 
 	input {
-
 		padding: 0;
 		background-color: transparent;
 		border: none;
@@ -47,26 +46,38 @@
 		color: $body-color;
 	}
 
-	textarea {
-		min-height: 5.0rem;
-		max-height: 5.0rem;
-		padding: 0 5px 0 0;
-		background-color: transparent;
-		border: none;
-		align-self: flex-end;
-	}
+	.textarea-container {
+		background: transparent;
+		position: relative;
+		overflow: auto;
+		margin-bottom: 6px;
 
-	textarea:focus {
-		text-align: left;
-		background-color: $body-bg;
-		color: $body-color;
+		.textarea {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding: 5px 0;
+			margin: 0 5px;
+			overflow: hidden;
+		}
+
+		.textarea:empty:before {
+			color: rgba(0, 0, 0, 0.6);
+			content: attr(data-placeholder);
+		}
+
+		.textarea:focus {
+			background-color: $body-bg;
+			border: solid medium rgb(89, 80, 229);
+		}
 	}
 
 	h4 {
 		align-self: flex-end;
 		text-align: right;
 		flex: 0.033;
-		margin-bottom: 3px;
+		margin-bottom: 9px;
 	}
 
 	h2 {
@@ -91,16 +102,17 @@
 	.number-title {
 		text-align: center;
 
-		height: 5.0rem;
+		height: 4.2rem;
 		font-size: 80px;
-		max-width: 4%;
+		max-width: 7%;
+		margin-bottom: 12px;
 	}
 
 	.action-title {
 		text-align: center;
 		height: 5.0rem;
-		font-size: 80px;
-		max-width: 20%;
+		font-size: 60px;
+		max-width: 13%;
 	}
 
 	.action_mod-title {
@@ -111,60 +123,29 @@
 	}
 
 	.place-container {
-		//border: 1px solid #000;
-		background: transparent;
-		position: relative;
-		overflow: auto;
 		flex: 0.85;
 
 		.place-title {
 			font-size: $h2-font-size;
 			line-height: $h2-font-size;
 			min-height: 10px;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			padding: 5px 0;
-			margin: 0 5px;
-			overflow: hidden;
-		}
-
-		.place-title:focus {
-			background-color: $body-bg;
-			border: solid medium rgb(89, 80, 229);
 		}
 	}
 
 	.am-container {
-		//border: 1px solid #000;
-		background: transparent;
-		position: relative;
-		overflow: auto;
 		flex: 0.4;
 
 		.am-title {
 			font-size: $h2-font-size;
 			line-height: $h2-font-size;
 			min-height: 10px;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			padding: 5px 0;
-			margin: 0 5px;
-			overflow: hidden;
-		}
-
-		.am-title:focus {
-			background-color: $body-bg;
-			border: solid medium rgb(89, 80, 229);
 		}
 	}
 
 	.call-title {
 		text-align: center;
 		font-size: 50px;
-		max-width: 8%;
+		width: 3em;
+		height: 4.2rem;
 	}
 }

@@ -16,7 +16,14 @@ Design should be minimal and functional -- but it should absolutely be __readabl
 - Table with each med unit
 - Highlights based on availability
 - Emphasis on readability over style and effects
-- Command line with strict context-free grammar
+
+### Desired Features
+- Allowing breaks/lunch timers
+- Stopwatch for calls 
+- Time last updated 
+- Sort entries by number, label, status, etc
+- Group units (add spacing)
+- Cookies to prevent data loss on reload
 
 ## Technologies
 - Bootstrap  
