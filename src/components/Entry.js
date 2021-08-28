@@ -1,32 +1,53 @@
-import React from "react";
+import React, {useState} from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 /** An individual entry **/
 const Entry = ( { entry, entries, setEntryList } ) => {
 
+	const [preposition, setPreposition] = useState("to");
+
 	let codes = {
-		"7": 	{label: "off duty",		color: "grey"},
-		"7OD": 	{label: "off duty",		color: "grey"},
-		"8": 	{label: "on duty",		color: "green"},
-		"97":	{label: "on scene", 	color: "red"},
-		"S9HI": {label: "Heat Illness"},
-		"S9": 	{label: "9"},
-		"S9M": 	{label: "9M"},
+		"6":	{label: "Busy",				color: "red", 	prep: "at"},
+		"7": 	{label: "off duty",			color: "grey", 	prep: "in"},
+		"7OD": 	{label: "off duty",			color: "grey", 	prep: "in"},
+		"8": 	{label: "on duty",			color: "green",	prep: "at"},
+		"18": 	{label: "on break",			color: "grey", 	prep: "in"},
+		"19": 	{label: "returning", 		color: "blue", 	prep: "to"},
+		"49": 	{label: "en route", 		color: "yellow", prep: "to"},
+		"87":	{label: "at meeting",		color: "blue",	prep: "at"},
+		"97":	{label: "on scene", 		color: "red",	prep: "at"},
+		"98":	{label: "finished",			color: "green",	prep: "at"},
 		"9": 	{label: "Repeat"},
-		"904": 	{label: "Fire"},
+		// "S9HI": {label: "Heat Illness"},
+		// "S9": 	{label: "9"},
+		// "S9M": 	{label: "9M"},
+		// "904": 	{label: "Fire"},
 	};
 
-	const getRadioCode = (code, prop) => {
+	const getRadioCode = (code) => {
 
-		code = code.replace(/\s/g, "");
+		code = code.replace(/\s/g, ""); // Remove whitespace
 		let re_dash = /10-?/; 			// 10-7, 107, 10-7 are accepted
 		let re_sig = /sig-?(nal-?)?/i; 	// Sig 9M, Signal 9, sig-9 are accepted
 
+		code = code.toUpperCase();
 		code = code.replace(re_dash, "");
 		code = code.replace(re_sig, "S");
 
-		return codes[code][prop];
+		return codes[code] ? codes[code] : "";
+	}
+
+	const inputChangeHandler = (e) => {
+		let label = e.target.dataset.field;
+		let value;
+
+		if(e.target.value)
+			value = e.target.value;
+		else
+			value = e.target.textContent;
+
+		entry[label] = value;
 	}
 
 	// When a user clicks EXITS the field
@@ -55,61 +76,118 @@ const Entry = ( { entry, entries, setEntryList } ) => {
 
 	// When a user sets the "action" of a unit.
 	const actionChangeHandler = (e) => {
-		// Update color and action modifier of this entry
+		//inputChangeHandler(e);
+		let code = getRadioCode(e.target.value);
+
+		setPreposition(code ? code.prep : "to");
+
 		setEntryList(entries.map(item => {
-			// Update Current Entry
 			if (item.id === entry.id) {
 				return {
 					...item,
-					action_mod: getRadioCode(e.target.value, "label"), // Changes the action modifier
-					color: getRadioCode(e.target.value, "color"),		// Changes the color
+					action_mod: code.label, // Changes the action modifier
+					color: code.color,		// Changes the color
 				}
 			}
 			// Don't change any other entries. Just the one we are currently editing.
 			else
 				return item;
 		}));
+
 	}
+
+	// const actionBlurHandler = (e) => {
+	// 	let code = getRadioCode(e.target.value);
+	//
+	// 	// Update action modifier of this entry
+	// 	setEntryList(entries.map(item => {
+	// 		if (item.id === entry.id) {
+	// 			return {
+	// 				...item,
+	// 				action_mod: code.label, // Changes the action modifier
+	// 				color: code.color,		// Changes the color
+	// 			}
+	// 		}
+	// 		// Don't change any other entries. Just the one we are currently editing.
+	// 		else
+	// 			return item;
+	// 	}));
+	// }
 
 	// Delete an entry on click
 	const deleteHandler = () => {
-		setEntryList(
-			entries.filter(el => (
-				el.id !== entry.id
-			))
-		);
+		if( confirm("Are you sure you want to delete this unit?") ) {
+			setEntryList(
+				entries.filter(el => (
+					el.id !== entry.id
+				))
+			);
+		}
 	}
 
 	return (
 		// Default color is grey
 		<Container className={`d-flex entry-row ecl-${entry.color ? entry.color : "grey"}`} fluid={true}>
-			<input type={"text"} className={"name-title"} placeholder={entry.name} spellCheck={false} />				{/* Pranav */}
 
-			<input type={"text"} className={"label-title"} placeholder={entry.label} spellCheck={false} />				{/* Med */}
-			<input type={"text"} className={"number-title"} placeholder={entry.number} spellCheck={false} />			{/* 1 */}
+			{/* Pranav */}
+			<input type={"text"} className={"name-title"}
+				   placeholder={"Name"} spellCheck={false}
+				   data-field={"name"}
+				   onBlur={inputChangeHandler}
+			/>
 
-			<h4>is</h4>																									{/* is */}
+			{/* Med */}
+			<input type={"text"} className={"rank-title"}
+				   placeholder={"Safety"} spellCheck={false}
+				   data-field={"rank"}
+				   onBlur={inputChangeHandler}
+			/>
+
+			{/* 1 */}
+			<input type={"text"} className={"number-title"}
+				   placeholder={"#"} spellCheck={false}
+				   data-field={"number"}
+				   onBlur={inputChangeHandler}
+			/>
+
+			<h4>is</h4>
+
+			{/* 10-49 */}
 			<input type={"text"} className={"action-title"}
-				   placeholder={entry.action} spellCheck={false}
-				   onChange={actionChangeHandler}
-			/>																											{/* 10-49 */}
+				   placeholder={"Action"} spellCheck={false}
+				   data-field={"action"}
+				   onInput={actionChangeHandler}
+			/>
+			{/* en route */}
 			<div className={"textarea-container am-container"}>
-				<p id={"am-title"} className={"textarea am-title"}
+				<p className={"textarea am-title"}
 				   contentEditable={true} spellCheck={false}
-				   data-placeholder={entry.action_mod} onBlur={areaBlurHandler} onFocus={areaFocusHandler}
-				/>																										{/* en route */}
+				   data-field={"action_mod"} data-placeholder={"modifier"}
+				   onBlur={areaBlurHandler} onFocus={areaFocusHandler}
+				>{ entry.action_mod ? entry.action_mod : "" }</p>
 			</div>
 
-			<h4>to</h4>																									{/* to */}
+			<h4>{preposition}</h4>
+
+			{/* Railblazer */}
 			<div className={"textarea-container place-container"}>
 				<p className={"textarea place-title"}
 				   contentEditable={true} spellCheck={false}
-				   data-placeholder={entry.place} onBlur={areaBlurHandler} onFocus={areaFocusHandler}
-				/>																										{/* Railblazer */}
+				   data-field={"place"} data-placeholder={"Location"}
+				   onBlur={areaBlurHandler} onFocus={areaFocusHandler} onInput={inputChangeHandler}
+				>{ entry.place ? entry.place : "" }</p>
 			</div>
 
-			<h4>for</h4>																								{/* for */}
-			<input type={"text"} className={"call-title"} placeholder={entry.call} />									{/* HI */}
+			<h4>for</h4>
+
+			{/* HI */}
+			<input type={"text"} className={"call-title"}
+				   placeholder={"Call"}
+				   data-field={"call"}
+				   onInput={inputChangeHandler}
+			/>
+
+			{/* Menu for deleting/breaking units */}
 			<Button variant={"danger"} onClick={deleteHandler} >Delete</Button>
 		</Container>
 	);

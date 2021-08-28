@@ -7,12 +7,13 @@ import Container from "react-bootstrap/Container";
 import Entry from "./Entry";
 
 /** Container for the Entries **/
-const EntryList = ( { entries, setEntryList } ) => {
+const EntryList = ( { entries, setEntryList, filter } ) => {
 	return (
 		<Container fluid={true}>
-			{entries.map(entry => (
-				<Entry key={entry.id} entry={entry} entries={entries} setEntryList={setEntryList} />
-			))}
+			{entries.map(entry => {
+				if( filter.value.test(entry[filter.key]) )
+					return (<Entry key={entry.id} entry={entry} entries={entries} setEntryList={setEntryList} />);
+			})}
 		</Container>
 	);
 }

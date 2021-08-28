@@ -2,7 +2,7 @@
 
 This web app helps First Aid dispatchers keep track of their medical units
 
-version 0.1.0 Alpha
+version 1.0.0 Beta
 
 ## Description
 

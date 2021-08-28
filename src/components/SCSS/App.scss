@@ -9,14 +9,20 @@ $body-bg:     rgb(240, 240, 240);
 /**   Rows   **/
 $red: rgb(242, 104, 104);
 $green: rgb(126, 161, 79);
-$blue: rgb(63, 169, 245);
-$yellow: rgb(254, 248, 166);
+$blue: rgb(101, 156, 203);
+$yellow: rgb(224, 219, 152);
 
 $theme-colors: (
-		"info": $blue,
-		"danger": $red,
+		//"primary": $gray-500,
+		//"secondary": $gray-700,
 		"success": $green,
+		"danger": rgb(176, 30, 30),
+		"warning": $yellow,
+		"info": $blue,
+		"light": $body-bg,
+		"dark": $body-color
 );
+
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
@@ -44,4 +50,5 @@ $theme-colors: (
 	border: 0;
 }
 
+@import "Form";
 @import "Entry";
