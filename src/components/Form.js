@@ -25,6 +25,8 @@ const Form = ({ entries, setEntryList, filter, setFilter } ) => {
 				place: "",
 				call: "",
 				color: "",
+				updated: new Date(),
+				group: "",
 			}
 		]);
 	}

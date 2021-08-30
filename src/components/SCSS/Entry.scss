@@ -36,6 +36,7 @@
 		margin-left: 5px;
 	}
 
+	// Single-line inputs
 	input {
 		padding: 0;
 		background-color: transparent;
@@ -49,6 +50,15 @@
 		color: $body-color;
 	}
 
+	input::-webkit-input-placeholder {
+		color: $input-placeholder-color;
+	}
+
+	input::-ms-input-placeholder {
+		color: $input-placeholder-color;
+	}
+
+	// Multiline inputs
 	.textarea-container {
 		background: transparent;
 		position: relative;
@@ -66,7 +76,7 @@
 		}
 
 		.textarea:empty:before {
-			color: rgba(0, 0, 0, 0.6);
+			color: $input-placeholder-color;//rgba(0, 0, 0, 0.6);
 			content: attr(data-placeholder);
 		}
 
