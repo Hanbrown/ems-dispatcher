@@ -2,7 +2,7 @@
 
 This web app helps First Aid dispatchers keep track of their medical units
 
-version 1.0.0 Beta
+version 1.1.0 Beta
 
 ## Description
 
@@ -20,9 +20,9 @@ Design should be minimal and functional -- but it should absolutely be __readabl
 ### Desired Features
 - Allowing breaks/lunch timers
 - Stopwatch for calls 
-- Time last updated 
-- Sort entries by number, label, status, etc
-- Group units (add spacing)
+- Time last updated (Completed)
+- Sort entries by number, label, status, etc (Partially Completed)
+- Group units (add spacing) (Completed)
 - Cookies to prevent data loss on reload
 
 ## Technologies
