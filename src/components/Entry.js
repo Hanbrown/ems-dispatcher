@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import Menu from "./Menu";
 
 /** An individual entry **/
-const Entry = ( { entry, entries, setEntryList } ) => {
+const Entry = ( { entry, /*entries, setEntryList,*/ groups, setGroups, defaultName, setDefaultName } ) => {
 
 	const [preposition, setPreposition] = useState("to");
 
 	let codes = {
+		// 10 codes
 		"6":	{label: "Busy",				color: "red", 	prep: "at"},
 		"7": 	{label: "off duty",			color: "grey", 	prep: "in"},
 		"7OD": 	{label: "off duty",			color: "grey", 	prep: "in"},
@@ -19,10 +21,17 @@ const Entry = ( { entry, entries, setEntryList } ) => {
 		"97":	{label: "on scene", 		color: "red",	prep: "at"},
 		"98":	{label: "finished",			color: "green",	prep: "at"},
 		"9": 	{label: "Repeat"},
-		// "S9HI": {label: "Heat Illness"},
-		// "S9": 	{label: "9"},
-		// "S9M": 	{label: "9M"},
-		// "904": 	{label: "Fire"},
+		// Signals
+		"S9HI": {label: "Heat Illness"},
+		"S9": 	{label: "9"},
+		"S9M": 	{label: "9M"},
+		"904": 	{label: "Fire"},
+		// Codes
+		"C1":	{label: "when able",		color: "blue", prep: "at"},
+		"C2":	{label: "urgent",			color: "red", prep: "at"},
+		"C3":	{label: "emergency",		color: "red", prep: "at"},
+		"C4":	{label: "no further assistance",	color: "red", prep: "at"},
+		"C7":	{label: "on lunch",			color: "grey", prep: "in"},
 	};
 
 	const getRadioCode = (code) => {
@@ -30,10 +39,12 @@ const Entry = ( { entry, entries, setEntryList } ) => {
 		code = code.replace(/\s/g, ""); // Remove whitespace
 		let re_dash = /10-?/; 			// 10-7, 107, 10-7 are accepted
 		let re_sig = /sig-?(nal-?)?/i; 	// Sig 9M, Signal 9, sig-9 are accepted
+		let re_code = /c(ode)?/i;		// C7, code 4, and Code 1 are accepted
 
 		code = code.toUpperCase();
-		code = code.replace(re_dash, "");
+		code = code.replace(re_dash, ""); // Default prefix is 10-*
 		code = code.replace(re_sig, "S");
+		code = code.replace(re_code, "C");
 
 		return codes[code] ? codes[code] : "";
 	}
@@ -74,25 +85,54 @@ const Entry = ( { entry, entries, setEntryList } ) => {
 		}
 	}
 
-	// When a user sets the "action" of a unit.
+	// When a user sets the "action" of a unit. Action is more advanced than other inputs, so it gets its own fn.
 	const actionChangeHandler = (e) => {
-		//inputChangeHandler(e);
+		// Get the radio code
 		let code = getRadioCode(e.target.value);
 
+		// Set the preposition
 		setPreposition(code ? code.prep : "to");
 
-		setEntryList(entries.map(item => {
-			if (item.id === entry.id) {
-				return {
-					...item,
-					action_mod: code.label, // Changes the action modifier
-					color: code.color,		// Changes the color
-				}
+		// Update the group list
+		setGroups(groups.map(group => {
+			if( group.id === entry.group ) {
+				return ({
+					...group,
+					members: group.members.map(mem => {
+						// Modify desired member/entry
+						if(  mem.id === entry.id ) {
+							return {
+								...mem,
+								action: e.target.value,
+								action_mod: code.label, // Changes the action modifier
+								color: code.color,		// Changes the color
+								updated: new Date(),	// Change time last updated
+							}
+						}
+						// Don't modify other members
+						else
+							return mem;
+					}),
+				});
 			}
-			// Don't change any other entries. Just the one we are currently editing.
 			else
-				return item;
+				return group;
 		}));
+
+
+		// setEntryList(entries.map(item => {
+		// 	if (item.id === entry.id) {
+		// 		return {
+		// 			...item,
+		// 			action_mod: code.label, // Changes the action modifier
+		// 			color: code.color,		// Changes the color
+		// 			updated: new Date(),	// Change time last updated
+		// 		}
+		// 	}
+		// 	// Don't change any other entries. Just the one we are currently editing.
+		// 	else
+		// 		return item;
+		// }));
 
 	}
 
@@ -113,17 +153,6 @@ const Entry = ( { entry, entries, setEntryList } ) => {
 	// 			return item;
 	// 	}));
 	// }
-
-	// Delete an entry on click
-	const deleteHandler = () => {
-		if( confirm("Are you sure you want to delete this unit?") ) {
-			setEntryList(
-				entries.filter(el => (
-					el.id !== entry.id
-				))
-			);
-		}
-	}
 
 	return (
 		// Default color is grey
@@ -188,7 +217,13 @@ const Entry = ( { entry, entries, setEntryList } ) => {
 			/>
 
 			{/* Menu for deleting/breaking units */}
-			<Button variant={"danger"} onClick={deleteHandler} >Delete</Button>
+			{/*<Button variant={"danger"} onClick={deleteHandler} >Delete</Button>*/}
+			<Menu
+				entry={entry}
+				//entries={entries} setEntryList={setEntryList}
+				groups={groups} setGroups={setGroups}
+				defaultGroupName={defaultName} setDefaultGroupName={setDefaultName}
+			/>
 		</Container>
 	);
 }

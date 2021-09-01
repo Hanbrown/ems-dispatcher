@@ -23,8 +23,9 @@ $theme-colors: (
 		"dark": $body-color
 );
 
-
 @import "../../../node_modules/bootstrap/scss/bootstrap";
+
+$input-placeholder-color: rgba(0, 0, 0, 0.6);
 
 /***********************************************************************************************************************
  *  Styles

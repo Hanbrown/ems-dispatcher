@@ -7,13 +7,34 @@ import Container from "react-bootstrap/Container";
 import Entry from "./Entry";
 
 /** Container for the Entries **/
-const EntryList = ( { entries, setEntryList, filter } ) => {
+const EntryList = ( { groups, setGroups, filter, defaultGroupName, setDefaultGroupName } ) => {
 	return (
 		<Container fluid={true}>
-			{entries.map(entry => {
-				if( filter.value.test(entry[filter.key]) )
-					return (<Entry key={entry.id} entry={entry} entries={entries} setEntryList={setEntryList} />);
-			})}
+			{
+				groups.map(group => {
+					console.log(group.members);
+					return (
+						<div key={group.id}>
+							<h6>{group.name}</h6>
+							{
+								group.members.length ? group.members.map(entry => {
+									// Get the currently selected entry;
+									if( filter.value.test(entry[filter.key]) ) {
+										return (
+											<Entry
+												key={entry.id} entry={entry}
+												groups={groups} setGroups={setGroups}
+												defaultName={defaultGroupName} setDefaultName={setDefaultGroupName}
+											/>
+										);
+									}
+								}) : <h6>Empty</h6>
+							}
+							{group.name ? <br /> : ""}
+						</div>
+					)
+				})
+			}
 		</Container>
 	);
 }
