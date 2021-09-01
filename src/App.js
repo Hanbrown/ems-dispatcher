@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./components/SCSS/App.scss";
 
 // Import BS Components
@@ -14,7 +14,19 @@ function App() {
 	/** States **/
 	const [entries, setEntryList] = useState([]); // The master list of entries
 	const [groups, setGroups] = useState([]); // The list of groups
+	const [defaultGroupName, setDefaultGroupName] = useState({id:"", name:"Default"}); // Name of the default group
 	const [filter, setFilter] = useState({key: "color", value: /(\w)*/}); // Filter shows everything by default
+
+	// Update groups list every time entry list is updated
+	// useEffect(() => {
+	// 	groups.map(group => {
+	// 		group.members = [];
+	// 	});
+	//
+	// 	entries.map(entry => {
+	// 		groups.filter(group => entry.group === group.id)[0].members.push(entry);
+	// 	});
+	// }, [entries]);
 
 	// Allow user to cancel page reload
 	/*window.onbeforeunload = function() {
@@ -28,6 +40,7 @@ function App() {
 				<Form
 					entries={entries} setEntryList={setEntryList}
 					groups={groups} setGroups={setGroups}
+					defaultGroupName={defaultGroupName} setDefaultGroupName={setDefaultGroupName}
 					filter={filter} setFilter={setFilter}
 				/>
 				<hr />

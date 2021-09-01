@@ -5,15 +5,23 @@
  * This component contains stuff for the options menu, displayed for each entry
  */
 
+// NPM Imports
 import React, {useState} from "react";
+import {v4 as uuidv4} from "uuid";
+
+// Bootstrap Imports (technically also NPM)
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {InputGroup} from "react-bootstrap";
 
-const Menu = ( { entry, entries, setEntryList } ) => {
+const Menu = ( { entry, entries, setEntryList, groups, setGroups } ) => {
 	const [show, setShow] = useState(false); // Whether the modal is showing or not
+	const [name, setName] = useState("");
 
-	//let timeDifference = ""; // Will be calculated on opening
-
+	// Get the amount of time elapsed since update
 	const getDifference = () => {
 		let currentTime = new Date();
 		let diff = currentTime.getTime() - entry.updated.getTime();
@@ -28,14 +36,72 @@ const Menu = ( { entry, entries, setEntryList } ) => {
 		mm = mm.toString().padStart(2, "0");
 		ss = ss.toString().padStart(2, "0");
 
-		//return `${hh}:${mm}:${ss}`;
 		return `${hh}:${mm}`;
 	}
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => {
 		setShow(true);
-		//timeDifference = getDifference();
+	}
+
+	// When user changes what group the entry is in
+	function changeGroupHandler(e) {
+		//alert(e.target.value);
+
+		setGroups(groups.map(group => {
+			// Remove entry from the old group
+			if( entry.group === group.id ) {
+				group.members = group.members.filter(mem => {
+					if(mem.id !== entry.id)
+						return mem;
+				});
+			}
+			// Add entry to new group
+			else if( e.target.value === group.id ) {
+				group.members.push(entry);
+			}
+		}));
+		console.log(groups);
+		// Change entry's group name to the new group
+		entry.group = e.target.value;
+	}
+
+	// When user edits the name of the to-be-added new group. Remember that setName describes a state only in Menu.js
+	const changeNewGroupHandler = (e) => {
+		setName(e.target.value);
+	}
+
+	// When user hits the "add" button to add a new group
+	const addGroupHandler = () => {
+		let newGroupId =  uuidv4();
+
+		setGroups(groups.map(group => {
+			// Remove entry from the old group
+			if( entry.group === group.id ) {
+				group.members = group.members.filter(mem => {
+					if(mem.id !== entry.id)
+						return mem;
+				});
+			}
+			// Add entry to new group
+
+		}));
+		console.log(groups);
+		// Change entry's group name to the new group
+		entry.group = newGroupId;
+
+		// Add new group, but don't add current member to it
+		setGroups([
+			...groups,
+			{
+				id: newGroupId,
+				name: name,
+				members: [entry],
+			}
+		]);
+
+		// Clear the value of the name field
+		setName("");
 	}
 
 	// Delete an entry on click
@@ -47,6 +113,12 @@ const Menu = ( { entry, entries, setEntryList } ) => {
 					el.id !== entry.id
 				))
 			);
+			groups.map(group => {
+				group.members = group.members.filter(mem => {
+					if( mem.id !== entry.id )
+						return mem;
+				})
+			})
 		}
 	}
 
@@ -63,10 +135,20 @@ const Menu = ( { entry, entries, setEntryList } ) => {
 				</Modal.Header>
 				<Modal.Body>
 					<label>Add to Group</label>
-					<select className={"form-select"}>
-						<option defaultValue={true} value={"none"}>--None--</option>
-						<option value={"non"}>--Non--</option>
-					</select>
+					<Form.Select aria-label={"None"} defaultValue={groups.filter(group => (group.id === entry.group))[0].name} onChange={changeGroupHandler}>
+						{
+							groups.map(group => {
+								if( group.id === entry.group )
+									return(<option key={group.id} value={group.id}>{group.name}</option>);
+
+								return(<option key={group.id} value={group.id}>{group.name}</option>);
+							})
+						}
+					</Form.Select>
+					<InputGroup>
+						<Form.Control type={"text"} placeholder={"Create New Group"} value={name} onChange={changeNewGroupHandler} />
+						<Button type={"submit"} variant={"outline-success"} onClick={addGroupHandler}>Add</Button>
+					</InputGroup>
 
 					<br />
 					<label className={"small"}>
@@ -74,10 +156,9 @@ const Menu = ( { entry, entries, setEntryList } ) => {
 						{entry.updated.getMinutes().toString().padStart(2, "0")}
 						{/*entry.updated.getSeconds().toString().padStart(2, "0")*/} ({getDifference()} ago)
 					</label>
-					<br />
-					<Button variant={"danger"} onClick={deleteHandler}>Delete Unit</Button>
 				</Modal.Body>
 				<Modal.Footer>
+					<Button variant={"danger"} onClick={deleteHandler}>Delete Unit</Button>
 					<Button variant={"outline-dark"} onClick={handleClose}>Close</Button>
 				</Modal.Footer>
 			</Modal>

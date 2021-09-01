@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "react-bootstrap/Button";
 
 // Stuff in the parentheses are the properties of this component
-const Form = ({ entries, setEntryList, filter, setFilter } ) => {
+const Form = ({ entries, setEntryList, groups, setGroups, defaultGroupName, setDefaultGroupName, filter, setFilter } ) => {
 
 	// All code is executed sequentially from here.
 
@@ -13,30 +13,88 @@ const Form = ({ entries, setEntryList, filter, setFilter } ) => {
 	const setEntryListHandler = (e) => {
 		e.preventDefault();
 
+		let newEntry = {
+			id: uuidv4(),
+			name: "",
+			rank: "",
+			number: "",
+			action: "",
+			action_mod: "",
+			place: "",
+			call: "",
+			color: "",
+			updated: new Date(),
+			group: "",
+		};
+
+		// If this is the first entry, create a default category
+		if( groups.length === 0 ) {
+			defaultGroupName.id = uuidv4();
+			newEntry.group = defaultGroupName.id;
+
+			setGroups([
+				...groups,
+				{
+					id: defaultGroupName.id,
+					name: defaultGroupName.name,
+					members: [newEntry],
+				}
+			]);
+		}
+		// If default category already exists, just add new entry to it.
+		else {
+			newEntry.group = defaultGroupName.id;
+			setGroups(
+				groups.map(group => {
+					if( group.name === defaultGroupName.name ) {
+						group.members.push(newEntry);
+						return group;
+					}
+					else
+						return group;
+				})
+			);
+		}
+
 		setEntryList([
 			...entries,
-			{
-				id: uuidv4(),
-				name: "",
-				rank: "",
-				number: "",
-				action: "",
-				action_mod: "",
-				place: "",
-				call: "",
-				color: "",
-				updated: new Date(),
-				group: "",
-			}
+			newEntry
 		]);
+
+
 	}
 
 	// Sort by Med/Safety number
 	const sortEntryList = () => {
-		entries.sort( (a, b) => (parseInt(a.number) - parseInt(b.number)) );
-		setEntryList(entries.map(item => {
-			return item;
-		}));
+		// First, sort groups by name (alphabetical)
+		groups.sort( (a, b) => {
+			let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+			let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			// names must be equal
+			return 0;
+		});
+		setGroups(groups.map(group => {
+			return group;
+		}))
+
+		// Next, in each group, sort the members by med number
+		groups.map(group => {
+			let members = group.members;
+
+			// Sort all the members
+			members.sort( (a, b) => (parseInt(a.number) - parseInt(b.number)) );
+			setEntryList(members.map(entry => {
+				return entry;
+			}));
+		})
+
 	}
 
 	// Set the filtered entries to those currently available

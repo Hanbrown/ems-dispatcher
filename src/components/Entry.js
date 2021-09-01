@@ -59,6 +59,8 @@ const Entry = ( { entry, entries, setEntryList, groups, setGroups } ) => {
 			value = e.target.textContent;
 
 		entry[label] = value;
+
+		updateGroupList();
 	}
 
 	// When a user clicks EXITS the field
@@ -105,7 +107,25 @@ const Entry = ( { entry, entries, setEntryList, groups, setGroups } ) => {
 				return item;
 		}));
 
+		groups.map(group => {
+			group.members = [];
+		});
+
+		entries.map(entry => {
+			groups.filter(group => entry.group === group.id)[0].members.push(entry);
+		});
 	}
+
+	// const updateGroupList = () => {
+	// 	console.log("Alert");
+	// 	groups.map(group => {
+	// 		group.members = [];
+	// 	});
+	//
+	// 	entries.map(entry => {
+	// 		groups.filter(group => entry.group === group.id)[0].members.push(entry);
+	// 	});
+	// }
 
 	// const actionBlurHandler = (e) => {
 	// 	let code = getRadioCode(e.target.value);
