@@ -96,10 +96,16 @@ const Form = ({ groups, setGroups, defaultGroupName, setFilter } ) => {
 		setFilter({key: "color", value: /(\w)*/});
 	}
 
+	const removeEmptyGroups = () => {
+		// Don't remove the default group
+		setGroups(groups.filter(group => group.id === defaultGroupName.id || group.members.length > 0));
+	}
+
 	return (
 		<form>
 			<Button variant="info" onClick={setEntryListHandler} >Add Unit</Button>
 			<Button variant="dark" onClick={sortEntryList}>Sort</Button>
+			<Button variant="dark" onClick={removeEmptyGroups}>Remove Empty Groups</Button>
 			{/*<Button variant="success" onClick={showAvailable}>Show Available</Button>*/}
 			{/*<Button variant="dark" onClick={showAllEntries}>Show All</Button>*/}
 		</form>

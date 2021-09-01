@@ -12,7 +12,6 @@ const EntryList = ( { groups, setGroups, filter, defaultGroupName, setDefaultGro
 		<Container fluid={true}>
 			{
 				groups.map(group => {
-					console.log(group.members);
 					return (
 						<div key={group.id}>
 							<h6>{group.name}</h6>

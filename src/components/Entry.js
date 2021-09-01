@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Menu from "./Menu";
 
 /** An individual entry **/
-const Entry = ( { entry, /*entries, setEntryList,*/ groups, setGroups, defaultName, setDefaultName } ) => {
+const Entry = ( { entry, groups, setGroups, defaultName, setDefaultName } ) => {
 
 	const [preposition, setPreposition] = useState("to");
 
@@ -118,41 +118,7 @@ const Entry = ( { entry, /*entries, setEntryList,*/ groups, setGroups, defaultNa
 			else
 				return group;
 		}));
-
-
-		// setEntryList(entries.map(item => {
-		// 	if (item.id === entry.id) {
-		// 		return {
-		// 			...item,
-		// 			action_mod: code.label, // Changes the action modifier
-		// 			color: code.color,		// Changes the color
-		// 			updated: new Date(),	// Change time last updated
-		// 		}
-		// 	}
-		// 	// Don't change any other entries. Just the one we are currently editing.
-		// 	else
-		// 		return item;
-		// }));
-
 	}
-
-	// const actionBlurHandler = (e) => {
-	// 	let code = getRadioCode(e.target.value);
-	//
-	// 	// Update action modifier of this entry
-	// 	setEntryList(entries.map(item => {
-	// 		if (item.id === entry.id) {
-	// 			return {
-	// 				...item,
-	// 				action_mod: code.label, // Changes the action modifier
-	// 				color: code.color,		// Changes the color
-	// 			}
-	// 		}
-	// 		// Don't change any other entries. Just the one we are currently editing.
-	// 		else
-	// 			return item;
-	// 	}));
-	// }
 
 	return (
 		// Default color is grey
@@ -160,30 +126,30 @@ const Entry = ( { entry, /*entries, setEntryList,*/ groups, setGroups, defaultNa
 
 			{/* Pranav */}
 			<input type={"text"} className={"name-title"}
-				   placeholder={"Name"} spellCheck={false}
+				   placeholder={"Name"} spellCheck={false} defaultValue={entry.name}
 				   data-field={"name"}
-				   onBlur={inputChangeHandler}
+				   onInput={inputChangeHandler}
 			/>
 
 			{/* Med */}
 			<input type={"text"} className={"rank-title"}
-				   placeholder={"Safety"} spellCheck={false}
+				   placeholder={"Safety"} spellCheck={false} defaultValue={entry.rank}
 				   data-field={"rank"}
-				   onBlur={inputChangeHandler}
+				   onInput={inputChangeHandler}
 			/>
 
 			{/* 1 */}
 			<input type={"text"} className={"number-title"}
-				   placeholder={"#"} spellCheck={false}
+				   placeholder={"#"} spellCheck={false} defaultValue={entry.number}
 				   data-field={"number"}
-				   onBlur={inputChangeHandler}
+				   onInput={inputChangeHandler}
 			/>
 
 			<h4>is</h4>
 
 			{/* 10-49 */}
 			<input type={"text"} className={"action-title"}
-				   placeholder={"Action"} spellCheck={false}
+				   placeholder={"Action"} spellCheck={false} defaultValue={entry.action}
 				   data-field={"action"}
 				   onInput={actionChangeHandler}
 			/>
@@ -192,7 +158,7 @@ const Entry = ( { entry, /*entries, setEntryList,*/ groups, setGroups, defaultNa
 				<p className={"textarea am-title"}
 				   contentEditable={true} spellCheck={false}
 				   data-field={"action_mod"} data-placeholder={"modifier"}
-				   onBlur={areaBlurHandler} onFocus={areaFocusHandler}
+				   onBlur={areaBlurHandler} onFocus={areaFocusHandler} onInput={inputChangeHandler}
 				>{ entry.action_mod ? entry.action_mod : "" }</p>
 			</div>
 
@@ -211,9 +177,9 @@ const Entry = ( { entry, /*entries, setEntryList,*/ groups, setGroups, defaultNa
 
 			{/* HI */}
 			<input type={"text"} className={"call-title"}
-				   placeholder={"Call"}
+				   placeholder={"Call"} defaultValue={entry.call}
 				   data-field={"call"}
-				   onInput={inputChangeHandler}
+				   onChange={inputChangeHandler}
 			/>
 
 			{/* Menu for deleting/breaking units */}
