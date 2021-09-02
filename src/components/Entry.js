@@ -59,6 +59,7 @@ const Entry = ( { entry, groups, setGroups, defaultName, setDefaultName } ) => {
 			value = e.target.textContent;
 
 		entry[label] = value;
+		entry.updated = new Date();
 	}
 
 	// When a user clicks EXITS the field

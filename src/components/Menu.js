@@ -136,6 +136,22 @@ const Menu = ( { entry, groups, setGroups, defaultGroupName, setDefaultGroupName
 		}
 	}
 
+	// Change color of entry, if user desires
+	const changeColorHandler = (e) => {
+		//entry.color = e.target.value;
+
+		setGroups(groups.map(group => {
+			if( group.id === entry.group ) {
+				group.members.map(mem => {
+					if ( mem.id === entry.id )
+						mem.color = e.target.value;
+					return mem;
+				})
+			}
+			return group;
+		}))
+	}
+
 	// Delete an entry on click
 	const deleteHandler = () => {
 		if( confirm("Are you sure you want to delete this unit?") ) {
@@ -169,7 +185,7 @@ const Menu = ( { entry, groups, setGroups, defaultGroupName, setDefaultGroupName
 					<Form.Select aria-label={"None"} defaultValue={groups.filter(group => (group.id === entry.group))[0].id} onChange={changeGroupHandler}>
 						{
 							groups.map(group => {
-								return (<option defaultValue={true} key={group.id} value={group.id}>{group.name}</option>);
+								return (<option key={group.id} value={group.id}>{group.name}</option>);
 							})
 						}
 					</Form.Select>
@@ -187,6 +203,16 @@ const Menu = ( { entry, groups, setGroups, defaultGroupName, setDefaultGroupName
 						<Form.Control type={"text"} placeholder={"Edit Group Name"} value={curName} onChange={changeCurGroupHandler} />
 						<Button type={"submit"} variant={"outline-success"} onClick={editGroupHandler}>Edit</Button>
 					</InputGroup>
+					<br />
+
+					<label>Edit Color</label>
+					<Form.Select aria-label={"None"} defaultValue={entry.color ? entry.color : "grey"} onChange={changeColorHandler}>
+						<option value={"green"}>Green</option>
+						<option value={"red"}>Red</option>
+						<option value={"blue"}>Blue</option>
+						<option value={"yellow"}>yellow</option>
+						<option value={"grey"}>Grey</option>
+					</Form.Select>
 					<br />
 
 					<label className={"small"}>
