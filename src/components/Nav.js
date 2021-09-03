@@ -3,9 +3,13 @@ import { v4 as uuidv4 } from "uuid";
 
 // Import BS Components
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {FloatingLabel, InputGroup} from "react-bootstrap";
 
 // Stuff in the parentheses are the properties of this component
-const Form = ({ groups, setGroups, defaultGroupName, setFilter } ) => {
+const Nav = ({ groups, setGroups, defaultGroupName, setFilter } ) => {
 
 	// All code is executed sequentially from here.
 
@@ -101,15 +105,40 @@ const Form = ({ groups, setGroups, defaultGroupName, setFilter } ) => {
 		setGroups(groups.filter(group => group.id === defaultGroupName.id || group.members.length > 0));
 	}
 
+	const changeGroupHandler = (e) => {
+		let re = new RegExp(e.target.value);
+		setFilter({key: "group", value: re});
+	}
+
 	return (
-		<form>
-			<Button variant="info" onClick={setEntryListHandler} >Add Unit</Button>
-			<Button variant="dark" onClick={sortEntryList}>Sort</Button>
-			<Button variant="dark" onClick={removeEmptyGroups}>Remove Empty Groups</Button>
-			{/*<Button variant="success" onClick={showAvailable}>Show Available</Button>*/}
-			{/*<Button variant="dark" onClick={showAllEntries}>Show All</Button>*/}
-		</form>
+		<Form>
+			<Row>
+				<Col xs={2}>
+					<Button variant="info" onClick={setEntryListHandler} >Add Unit</Button>
+					<Button variant="dark" onClick={sortEntryList}>Sort</Button>
+				</Col>
+				<Col xs={3}>
+					<Button variant="success" onClick={showAvailable}>Show Available</Button>
+					<Button variant="dark" onClick={showAllEntries}>Show All</Button>
+				</Col>
+				<Col xs={3}>
+					{/*<FloatingLabel controlId="floatingSelect" label="Category Filter">*/}
+					{/*	<Form.Select aria-label={"None"} defaultValue={"(\d)|(\w)|-"} onChange={changeGroupHandler}>*/}
+					{/*		<option key={"aaab"} value={"(\d)|(\w)|-"}>All</option>*/}
+					{/*		{*/}
+					{/*			groups.map(group => {*/}
+					{/*				return (<option key={group.id} value={group.id}>{group.name}</option>);*/}
+					{/*			})*/}
+					{/*		}*/}
+					{/*	</Form.Select>*/}
+					{/*</FloatingLabel>*/}
+				</Col>
+				<Col xs={{span: 3, offset: 1}}>
+					<Button variant="dark" onClick={removeEmptyGroups}>Remove Empty Groups</Button>
+				</Col>
+			</Row>
+		</Form>
 	);
 }
 
-export default Form;
+export default Nav;

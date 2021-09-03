@@ -130,16 +130,12 @@ const Menu = ( { entry, groups, setGroups, defaultGroupName, setDefaultGroupName
 			if( entry.group === defaultGroupName.id) {
 				setDefaultGroupName({...defaultGroupName, name: curName});
 			}
-
-			// Clear the edit name category
-			//setCurName("");
 		}
 	}
 
 	// Change color of entry, if user desires
 	const changeColorHandler = (e) => {
-		//entry.color = e.target.value;
-
+		// We have to do all this because we need to update the master group list
 		setGroups(groups.map(group => {
 			if( group.id === entry.group ) {
 				group.members.map(mem => {

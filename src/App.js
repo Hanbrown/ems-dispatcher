@@ -7,7 +7,8 @@ import Col from "react-bootstrap/Col";
 
 // Import Custom Components
 import EntryList from "./components/EntryList";
-import Form from "./components/Form";
+import Nav from "./components/Nav";
+import Button from "react-bootstrap/Button";
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
 		<Row>
 			<Col lg={{ span: 10, offset: 1 }}>
 				<h1>EMS Dispatcher Beta</h1>
-				<Form
+				<Nav
 					// entries={entries} setEntryList={setEntryList}
 					groups={groups} setGroups={setGroups}
 					setFilter={setFilter}

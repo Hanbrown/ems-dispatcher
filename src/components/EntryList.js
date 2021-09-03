@@ -8,6 +8,11 @@ import Entry from "./Entry";
 
 /** Container for the Entries **/
 const EntryList = ( { groups, setGroups, filter, defaultGroupName, setDefaultGroupName } ) => {
+	// If there are no members, then show a unique message
+	if( groups.length === 0 )
+		return (<h5>There's nothing here -- Add a Unit!</h5>);
+
+	// Otherwise, render as normal
 	return (
 		<Container fluid={true}>
 			{
