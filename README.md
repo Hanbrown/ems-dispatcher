@@ -2,13 +2,13 @@
 
 This web app helps First Aid dispatchers keep track of their medical units
 
-version 1.1.0 Beta
+version 1.1.1 Beta
 
 ## Description
 
 A user should be able to quickly find out what med units are available, which ones are on break, which ones are on a call, and which ones are en route to a call/place.
 
-Users should be able to quickly change the state of a med unit with a quick command. Hopefully, a GUI option will be added -- but the command line should be the go-to solution.
+Users should be able to quickly change the state of a med unit with a quick edit. Hopefully, a command line option will be added.
 
 Design should be minimal and functional -- but it should absolutely be __readable__.
 
@@ -18,12 +18,15 @@ Design should be minimal and functional -- but it should absolutely be __readabl
 - Emphasis on readability over style and effects
 
 ### Desired Features
-- Allowing breaks/lunch timers
-- Stopwatch for calls 
-- Time last updated (Completed)
 - Sort entries by number, label, status, etc (Partially Completed)
-- Group units (add spacing) (Completed)
+- Change styling so all units can be seen at once
 - Cookies to prevent data loss on reload
+- Access across multiple devices
+
+
+- Allowing breaks/lunch timers
+- Stopwatch for calls
+- Parsing Excel docs for quick setup
 
 ## Technologies
 - Bootstrap  
